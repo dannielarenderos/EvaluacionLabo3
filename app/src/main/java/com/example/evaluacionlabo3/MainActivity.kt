@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
     override fun managePortraitItemClick(item: Movie) {
         val coinBundle = Bundle()
 
-        coinBundle.putParcelable("COIN", item)
+        coinBundle.putParcelable("MOVIE", item)
         startActivity(Intent(this, MovieViewer::class.java).putExtras(coinBundle))
     }
 
@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
                 getText(R.string.n_a_value).toString(),
                 getText(R.string.n_a_value).toString()
               ))
-
 
             changeFragment(R.id.land_main_content_fragment, mainContentFragment)
 

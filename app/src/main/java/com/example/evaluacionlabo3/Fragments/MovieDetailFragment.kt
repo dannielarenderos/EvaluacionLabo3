@@ -14,13 +14,19 @@ import com.example.evaluacionlabo3.database.entities.Movie
 import kotlinx.android.synthetic.main.fragment_movie_detail.view.*
 
 class MovieDetailFragment : Fragment() {
-    var movie = Movie(getString(R.string.n_a_value),getString(R.string.n_a_value),getString(R.string.n_a_value),getString(R.string.n_a_value), R.drawable.ic_launcher_background.toString())
+    var movie = Movie(
+        getText(R.string.n_a_value).toString(),
+        getText(R.string.n_a_value).toString(),
+        getText(R.string.n_a_value).toString(),
+        getText(R.string.n_a_value).toString(),
+        getText(R.string.n_a_value).toString()
+    )
 
     companion object {
         fun newInstance (dataset : Movie) : MovieDetailFragment{
             return MovieDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable("book", dataset)
+                    putParcelable("movie", dataset)
                 }
             }
         }
@@ -30,7 +36,7 @@ class MovieDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            movie = it.getParcelable("book")
+            movie = it.getParcelable("movie")
         }
     }
 
