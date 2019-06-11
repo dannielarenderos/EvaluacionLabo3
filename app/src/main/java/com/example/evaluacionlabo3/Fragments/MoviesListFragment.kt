@@ -84,7 +84,7 @@ class MoviesListFragment : Fragment() {
 
     }
 
-    fun updateBookList(bookList: ArrayList<Movie>){ movieAdapter.changeDataSet(bookList) }
+    fun updateList(list: ArrayList<Movie>){ movieAdapter.changeDataSet(list) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

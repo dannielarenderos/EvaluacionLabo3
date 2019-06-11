@@ -6,9 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.evaluacionlabo3.Fragments.MovieDetailFragment
 import com.example.evaluacionlabo3.Fragments.MoviesListFragment
 import com.example.evaluacionlabo3.database.entities.Movie
+import com.example.evaluacionlabo3.database.viewModels.MovieViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
 
@@ -16,12 +20,15 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
     private var movieList = ArrayList<Movie>()
     private lateinit var listFragment: MoviesListFragment
     private lateinit var mainContentFragment: MovieDetailFragment
+    private lateinit var viewModel : MovieViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initMainFragment()
+        bind()
 
     }
 
@@ -71,5 +78,18 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
 
     private fun changeFragment(id: Int, frag: Fragment) {
         supportFragmentManager.beginTransaction().replace(id, frag).commit()
+    }
+
+    private fun bind(){
+        viewModel= ViewModelProviders.of(this).get(MovieViewModel::class.java)
+
+
+        viewModel.getAll().observe(this, Observer {
+            listFragment.updateList(it as ArrayList<Movie>)
+        })
+
+        btn_search.setOnClickListener {
+            viewModel.retriveMovie(et_clue.text.toString())
+        }
     }
 }

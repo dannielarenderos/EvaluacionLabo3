@@ -12,6 +12,7 @@
             android:layout_height="wrap_content">
 
         <EditText
+                android:id="@+id/et_clue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/searchbar_style"
