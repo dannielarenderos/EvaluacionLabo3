@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 
 import com.example.evaluacionlabo3.R
 import com.example.evaluacionlabo3.database.entities.Movie
+import kotlinx.android.synthetic.main.cardview_movie.view.*
 import kotlinx.android.synthetic.main.fragment_movie_detail.view.*
 
 class MovieDetailFragment : Fragment() {
@@ -52,5 +53,6 @@ class MovieDetailFragment : Fragment() {
                 .into(view.image_main_content_fragment)
 
             view.movie_title_main_content_fragment.text = movie.Title
+            view.released_main_content_fragment.text = movie.Year
     }
 }

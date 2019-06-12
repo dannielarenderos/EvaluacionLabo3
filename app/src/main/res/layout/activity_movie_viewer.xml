@@ -54,7 +54,7 @@
                             android:paddingRight="8dp"
                             android:layout_marginBottom="4dp"
                             android:textColor="@android:color/black"
-                            android:text="detalle 1"
+                            android:text="Tipo"
                             android:textSize="25dp"
                             android:textStyle="bold"
                     />
@@ -99,7 +99,7 @@
                             android:layout_marginBottom="4dp"
                             android:textColor="@android:color/black"
                             android:layout_gravity="center_horizontal"
-                            android:text="detalle 2"
+                            android:text="Año"
                             android:textStyle="bold"
                     />
 

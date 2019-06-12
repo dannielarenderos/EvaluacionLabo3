@@ -25,6 +25,4 @@ interface CoincidenciaService{
                 .build().create(CoincidenciaService::class.java)
         }
     }
-
-
 }
