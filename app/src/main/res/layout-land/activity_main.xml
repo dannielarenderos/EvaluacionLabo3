@@ -9,12 +9,47 @@
         android:orientation="horizontal"
         tools:context=".MainActivity">
 
-    <FrameLayout
-            android:id="@+id/land_list_fragment"
-            android:layout_marginBottom="8dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"/>
+    <LinearLayout android:layout_width="0dp"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:orientation="vertical">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <EditText
+                    android:id="@+id/et_clue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/searchbar_style"
+                    android:hint="Search movie..."
+                    android:padding="8dp" />
+
+            <ImageButton
+                    android:id="@+id/btn_search"
+                    android:layout_width="34dp"
+                    android:layout_height="29dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/outline_search_black_18dp" />
+
+
+        </RelativeLayout>
+        <FrameLayout
+                android:id="@+id/land_list_fragment"
+                android:layout_marginBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </LinearLayout>
 
     <LinearLayout
             android:layout_width="0dp"

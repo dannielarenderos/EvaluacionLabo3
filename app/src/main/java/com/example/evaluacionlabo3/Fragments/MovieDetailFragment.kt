@@ -14,13 +14,7 @@ import com.example.evaluacionlabo3.database.entities.Movie
 import kotlinx.android.synthetic.main.fragment_movie_detail.view.*
 
 class MovieDetailFragment : Fragment() {
-    var movie = Movie(
-        getText(R.string.n_a_value).toString(),
-        getText(R.string.n_a_value).toString(),
-        getText(R.string.n_a_value).toString(),
-        getText(R.string.n_a_value).toString(),
-        getText(R.string.n_a_value).toString()
-    )
+    private lateinit var movie : Movie
 
     companion object {
         fun newInstance (dataset : Movie) : MovieDetailFragment{
@@ -50,7 +44,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     fun bindData(view: View) {
-        if(view != null) {
+
             Glide.with(view.context)
                 .load(movie.Poster)
                 .centerCrop()
@@ -58,7 +52,5 @@ class MovieDetailFragment : Fragment() {
                 .into(view.image_main_content_fragment)
 
             view.movie_title_main_content_fragment.text = movie.Title
-
-        }
     }
 }

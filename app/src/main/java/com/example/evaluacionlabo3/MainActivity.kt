@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
 
     private var movieList = ArrayList<Movie>()
     private lateinit var listFragment: MoviesListFragment
-    private lateinit var mainContentFragment: MovieDetailFragment
+        private lateinit var mainContentFragment: MovieDetailFragment
     private lateinit var viewModel : MovieViewModel
 
 
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
             listFragment.updateList(it as ArrayList<Movie>)
         })
 
-        btn_search.setOnClickListener {
+        btn_search?.setOnClickListener {
             viewModel.retriveMovie(et_clue.text.toString())
         }
     }
