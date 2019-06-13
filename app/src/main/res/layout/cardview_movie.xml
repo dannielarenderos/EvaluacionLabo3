@@ -58,7 +58,8 @@
 
                 android:layout_marginRight="20dp"
                 android:text="type"
-                android:gravity="end"/>
+                android:gravity="end"
+                />
 
         <TextView
                 android:id="@+id/movie_plot_cv"
