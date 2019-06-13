@@ -50,9 +50,13 @@ class MovieDetailFragment : Fragment() {
                 .load(movie.Poster)
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
-                .into(view.image_main_content_fragment)
+                .into(view.image_main_content_fragment2)
 
             view.movie_title_main_content_fragment.text = movie.Title
+            view.plot_main_content_fragment.text = movie.Plot
             view.released_main_content_fragment.text = movie.Year
+            view.runtime_main_content_fragment.text = movie.Runtime
+            view.director_main_content_fragment.text = movie.Director
+            view.actors_main_content_fragment.text = movie.Actors
     }
 }

@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
 
     private var movieList = ArrayList<Movie>()
     private lateinit var listFragment: MoviesListFragment
-        private lateinit var mainContentFragment: MovieDetailFragment
+    private lateinit var mainContentFragment: MovieDetailFragment
     private lateinit var viewModel : MovieViewModel
 
 
@@ -38,16 +38,9 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
     }
 
     override fun managePortraitItemClick(item: Movie) {
-        val coinBundle = Bundle()
-
-        if(item.Country == getText(R.string.n_a_value).toString()){
-            viewModel.getMovieDetails(item.imdbID)
-        }
-
-        coinBundle.putParcelable("MOVIE",item)
-        startActivity(Intent(this, MovieViewer::class.java)
-            .putExtra("imdb", item.imdbID)
-            .putExtras(coinBundle))
+        val movieBundle = Bundle()
+        movieBundle.putParcelable("MOVIE",item)
+        startActivity(Intent(this, MovieViewer::class.java).putExtras(movieBundle))
     }
 
     override fun manageLandscapeItemClick(item: Movie) {
@@ -70,7 +63,7 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
                 getText(R.string.n_a_value).toString(),
                 getText(R.string.n_a_value).toString(),
                 getText(R.string.n_a_value).toString()
-              ))
+            ))
 
             changeFragment(R.id.land_main_content_fragment, mainContentFragment)
 
@@ -97,6 +90,7 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
             viewModel.retriveMovie(et_clue.text.toString())
         }
     }
+
 
 
 }

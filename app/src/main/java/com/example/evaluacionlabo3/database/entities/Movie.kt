@@ -10,13 +10,13 @@ import com.squareup.moshi.Json
 data class Movie(
     @field:Json(name="Title")
     var Title:String = "N/A",
-    @field:Json(name="imdbID")
+    @field:Json(name="Year")
+    var Year:String = "N/A",
     @PrimaryKey
+    @field:Json(name="imdbID")
     var imdbID:String = "N/A",
     @field:Json(name="Type")
     var Type:String = "N/A",
-    @field:Json(name="Year")
-    var Year:String = "N/A",
     @field:Json(name="Poster")
     var Poster: String = "N/A",
     @field:Json(name="Plot")
@@ -44,6 +44,15 @@ data class Movie(
         source.readString(),
         source.readString(),
         source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString(),
         source.readString()
     )
 
@@ -55,6 +64,17 @@ data class Movie(
         writeString(imdbID)
         writeString(Type)
         writeString(Poster)
+
+        writeString(Plot)
+        writeString(Country)
+        writeString(imdbRating)
+        writeString(Runtime)
+        writeString(Director)
+        writeString(Actors)
+        writeString(Rated)
+        writeString(Genre)
+        writeString(Released)
+
     }
 
     companion object {

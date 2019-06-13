@@ -36,7 +36,7 @@ class MovieAdapter(var items: ArrayList<Movie>, val clickListener: (Movie)->Unit
                 .into(movie_image_cv)
 
             movie_title_cv.text = item.Title
-            movie_plot_cv.text = item.imdbID
+            movie_plot_cv.text = item.Rated
             movie_rate_cv.text = item.Type
             movie_runtime_cv.text = item.Year
 

@@ -11,59 +11,21 @@ import kotlinx.android.synthetic.main.activity_movie_viewer.*
 
 
 class MovieViewer : AppCompatActivity() {
-    private lateinit var viewModel : MovieViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_viewer)
-        viewModel= ViewModelProviders.of(this).get(MovieViewModel::class.java)
-        val mIntent = intent
-
-        if(mIntent!=null){
-
-            var receiver: Movie = intent?.extras?.getParcelable("MOVIE") ?:Movie(
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString(),
-                getText(R.string.n_a_value).toString()
-
-            )
-
-            var id = intent.getStringExtra("imdb")
-
-            viewModel.getMovieById (id) {
-                var item = it.value?:Movie(
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString(),
-                    getText(R.string.n_a_value).toString()
-                )
-                Log.d("llegue", item.toString())
-                bindData(item)
-            }
-
-            bindImage(receiver)
+        val reciever: Movie? = intent?.extras?.getParcelable("MOVIE")
+        if(reciever!= null){
+            Log.d("llegada", reciever.toString())
+            init(reciever)
         }
+
+
+    }
+
+    fun init(reciever:Movie){
+        bindImage(reciever)
+        bindData(reciever)
     }
 
     fun bindImage(item: Movie){
@@ -76,6 +38,12 @@ class MovieViewer : AppCompatActivity() {
 
     fun bindData(item:Movie) {
         movie_title.text = item.Title
+        description.text = item.Plot
+        year.text = item.Year
+        director_detalles.text = item.Director
+        actores_detalles.text = item.Actors
+        genre_detalles.text=item.Genre
+        duracion_detalles.text=item.Runtime
 
 
     }

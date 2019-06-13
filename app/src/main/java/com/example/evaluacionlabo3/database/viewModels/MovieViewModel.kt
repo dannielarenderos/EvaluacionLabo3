@@ -50,33 +50,22 @@ class MovieViewModel(private val app : Application) : AndroidViewModel(app) {
         this@MovieViewModel.nuke()
         val response =  repository.retrieveRepoAsync(clue).await()
 
-        if(response.isSuccessful) with(response.body()?.Search){
+        if(response.isSuccessful)with(response.body()?.Search){
             this?.forEach {
-                this@MovieViewModel.insert(it)
-                android.util.Log.d("terminado",it.toString()+" ingresada correctamente")
+                getMovies(it.imdbID)
             }
         }else with(response){
-            android.util.Log.d("error",response.toString())
             when(this.code()){
                 404->{
-                    android.widget.Toast.makeText(app, "pelicula no encontrada", android.widget.Toast.LENGTH_LONG).show()
 
                 }
             }
         }
     }
-    fun getMovieDetails(id:String) = viewModelScope.launch {
-        val response2=repository.getMovieDetails(id).await()
-        if(response2.isSuccessful) with(response2.body()){
-            this@MovieViewModel.update(response2.body()!!)
-        }else with(response2){
-            android.util.Log.d("error",response2.toString())
-            when(this.code()){
-                404->{
-                    android.widget.Toast.makeText(app, "pelicula no encontrada", android.widget.Toast.LENGTH_LONG).show()
-
-                }
-            }
+    fun getMovies (id: String) = viewModelScope.launch {
+        val response = repository.getMovieDetails(id).await()
+        if(response.isSuccessful)with(response.body()){
+            this@MovieViewModel.insert(this!!)
         }
     }
 
