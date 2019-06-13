@@ -127,7 +127,7 @@
                 />
 
                 <TextView
-                        android:id="@+id/genre_main_content_fragment"
+                        android:id="@+id/genre_detalle"
 
                         android:layout_width="0dp"
                         android:layout_weight="3"

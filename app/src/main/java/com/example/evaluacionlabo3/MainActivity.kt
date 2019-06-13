@@ -1,7 +1,9 @@
 package com.example.evaluacionlabo3
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
     private lateinit var listFragment: MoviesListFragment
     private lateinit var mainContentFragment: MovieDetailFragment
     private lateinit var viewModel : MovieViewModel
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,8 +90,17 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
         })
 
         btn_search?.setOnClickListener {
-            viewModel.retriveMovie(et_clue.text.toString())
+            if(internetDisponible()){
+                viewModel.retriveMovie(et_clue.text.toString())
+            }
+
         }
+    }
+
+    fun internetDisponible(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
 
 

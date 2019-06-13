@@ -58,5 +58,6 @@ class MovieDetailFragment : Fragment() {
             view.runtime_main_content_fragment.text = movie.Runtime
             view.director_main_content_fragment.text = movie.Director
             view.actors_main_content_fragment.text = movie.Actors
+            view.genre_detalle.text = movie.Genre
     }
 }
