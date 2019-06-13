@@ -3,20 +3,12 @@ package com.example.evaluacionlabo3
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatViewInflater
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.evaluacionlabo3.database.entities.Movie
 import com.example.evaluacionlabo3.database.viewModels.MovieViewModel
 import kotlinx.android.synthetic.main.activity_movie_viewer.*
-import kotlinx.android.synthetic.main.activity_movie_viewer.view.*
-import kotlinx.android.synthetic.main.cardview_movie.*
-import kotlinx.android.synthetic.main.fragment_movie_detail.*
-import kotlinx.android.synthetic.main.fragment_movie_detail.view.*
+
 
 class MovieViewer : AppCompatActivity() {
     private lateinit var viewModel : MovieViewModel
@@ -83,7 +75,7 @@ class MovieViewer : AppCompatActivity() {
     }
 
     fun bindData(item:Movie) {
-        name_main_content_fragment.text = item.Title
+        movie_title.text = item.Title
 
 
     }
