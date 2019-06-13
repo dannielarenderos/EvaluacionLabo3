@@ -38,13 +38,16 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.ListenerTools {
     }
 
     override fun managePortraitItemClick(item: Movie) {
-        //val coinBundle = Bundle()
-        viewModel.getMovieDetails(item.imdbID)
-        //al item2 = viewModel.getMovieById(item.imdbID)
-        //coinBundle.putParcelable("MOVIE",item2)
-        //startActivity(Intent(this, MovieViewer::class.java).putExtras(coinBundle))
+        val coinBundle = Bundle()
 
+        if(item.Country == getText(R.string.n_a_value).toString()){
+            viewModel.getMovieDetails(item.imdbID)
+        }
 
+        coinBundle.putParcelable("MOVIE",item)
+        startActivity(Intent(this, MovieViewer::class.java)
+            .putExtra("imdb", item.imdbID)
+            .putExtras(coinBundle))
     }
 
     override fun manageLandscapeItemClick(item: Movie) {

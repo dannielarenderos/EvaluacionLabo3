@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.evaluacionlabo3.database.RoomDB
 import com.example.evaluacionlabo3.database.entities.Movie
@@ -15,6 +16,8 @@ import kotlinx.coroutines.launch
 
 class MovieViewModel(private val app : Application) : AndroidViewModel(app) {
     private val repository : MovieRepository
+    lateinit var movie: LiveData<Movie>
+
 
     init {
         val movieDao = RoomDB.getInstance(app).movieDao()
@@ -35,10 +38,12 @@ class MovieViewModel(private val app : Application) : AndroidViewModel(app) {
         repository.update(movie)
     }
 
-    fun getMovieById(id:String) : Movie {
-        return repository.getMovieById(id)
+    fun getMovieById(id:String, callback: (data: LiveData<Movie>) -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            movie = MutableLiveData(repository.getMovieById(id))
+            callback(movie)
+        }
     }
-
 
 
     fun retriveMovie(clue : String) = viewModelScope.launch {
@@ -64,8 +69,6 @@ class MovieViewModel(private val app : Application) : AndroidViewModel(app) {
         val response2=repository.getMovieDetails(id).await()
         if(response2.isSuccessful) with(response2.body()){
             this@MovieViewModel.update(response2.body()!!)
-            val respuesta = this@MovieViewModel.getMovieById(id)
-            Log.d("respuesta", response2.body().toString())
         }else with(response2){
             android.util.Log.d("error",response2.toString())
             when(this.code()){
