@@ -1,12 +1,15 @@
 package com.example.evaluacionlabo3.database.viewModels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.evaluacionlabo3.database.RoomDB
 import com.example.evaluacionlabo3.database.entities.Movie
 import com.example.evaluacionlabo3.database.repositories.MovieRepository
+import com.example.evaluacionlabo3.retrofit.MovieDetails
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -28,6 +31,16 @@ class MovieViewModel(private val app : Application) : AndroidViewModel(app) {
 
     private suspend fun nuke()=repository.nuke()
 
+    fun update(movie:Movie) = viewModelScope.launch (Dispatchers.IO){
+        repository.update(movie)
+    }
+
+    fun getMovieById(id:String) : Movie {
+        return repository.getMovieById(id)
+    }
+
+
+
     fun retriveMovie(clue : String) = viewModelScope.launch {
         this@MovieViewModel.nuke()
         val response =  repository.retrieveRepoAsync(clue).await()
@@ -47,4 +60,23 @@ class MovieViewModel(private val app : Application) : AndroidViewModel(app) {
             }
         }
     }
+    fun getMovieDetails(id:String) = viewModelScope.launch {
+        val response2=repository.getMovieDetails(id).await()
+        if(response2.isSuccessful) with(response2.body()){
+            this@MovieViewModel.update(response2.body()!!)
+            val respuesta = this@MovieViewModel.getMovieById(id)
+            Log.d("respuesta", response2.body().toString())
+        }else with(response2){
+            android.util.Log.d("error",response2.toString())
+            when(this.code()){
+                404->{
+                    android.widget.Toast.makeText(app, "pelicula no encontrada", android.widget.Toast.LENGTH_LONG).show()
+
+                }
+            }
+        }
+    }
+
+
+
 }

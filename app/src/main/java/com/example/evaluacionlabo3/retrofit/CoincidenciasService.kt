@@ -1,5 +1,6 @@
 package com.example.evaluacionlabo3.retrofit
 
+import com.example.evaluacionlabo3.database.entities.Movie
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -14,6 +15,9 @@ interface CoincidenciaService{
 
     @GET("/")
     fun getMovies(@Query("s")clue : String, @Query("apikey") apikey:String) : Deferred<Response<Coincidencias>>
+
+    @GET("/")
+    fun getMoviesDetails(@Query("i") id: String, @Query("apikey") apikey:String) :Deferred<Response<Movie>>
 
     companion object {
         fun getCoincidenciaService(): CoincidenciaService{

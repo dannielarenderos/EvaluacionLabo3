@@ -1,4 +1,4 @@
-package com.example.evaluacionlabo3.database.entities
+package com.example.evaluacionlabo3.retrofit
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -6,12 +6,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
-@Entity(tableName = "movie")
-data class Movie(
+
+data class MovieDetails (
     @field:Json(name="Title")
     var Title:String = "N/A",
     @field:Json(name="imdbID")
-    @PrimaryKey
     var imdbID:String = "N/A",
     @field:Json(name="Type")
     var Type:String = "N/A",
@@ -37,31 +36,4 @@ data class Movie(
     var Genre : String = "N/A",
     @field:Json(name="Released")
     var Released: String = "N/A"
-
-) : Parcelable {
-    constructor(source: Parcel) : this(
-        source.readString(),
-        source.readString(),
-        source.readString(),
-        source.readString(),
-        source.readString()
-    )
-
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
-        writeString(Title)
-        writeString(Year)
-        writeString(imdbID)
-        writeString(Type)
-        writeString(Poster)
-    }
-
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<Movie> = object : Parcelable.Creator<Movie> {
-            override fun createFromParcel(source: Parcel): Movie = Movie(source)
-            override fun newArray(size: Int): Array<Movie?> = arrayOfNulls(size)
-        }
-    }
-}
+)
